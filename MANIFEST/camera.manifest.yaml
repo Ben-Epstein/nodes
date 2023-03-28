@@ -4,6 +4,7 @@ COMMAND:
     type: LOADER
     docker:
       folder_name: CAMERA
+      rq_name: camera
       arguments:
         linux:
           - --rm
@@ -11,8 +12,6 @@ COMMAND:
           - --env='DISPLAY'
           - --volume='/tmp/.X11-unix:/tmp/.X11-unix:rw'
           - --device='/dev/video0:/dev/video0'
-        darwin:
-          - "-it"
     parameters:
         file_type: { type: "string", default: "image" }
         camera_ind: { type: "integer", default: 0 }

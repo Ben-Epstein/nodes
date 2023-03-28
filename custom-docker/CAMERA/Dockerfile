@@ -1,14 +1,28 @@
 # https://hub.docker.com/r/nikolaik/python-nodejs
 FROM nikolaik/python-nodejs:latest
 
-# For Django hot reload
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
+# Set the working directory in the container
 WORKDIR /code
 
-#Install the requirements
-COPY requirements.txt /code/
+# Copy the requirements file to the container
+COPY requirements.txt .
+
+# Install the required packages
 RUN pip install -r requirements.txt
 
+COPY yaml-script.sh .
+
+# Make yaml-script.sh executable
+RUN chmod +x yaml-script.sh
+
+# Run the yaml-script.sh file
+RUN bash yaml-script.sh
+
+# Copy the rest of the application code to the container
 COPY . /code/
+
+# # RUN CD PYTHON
+WORKDIR /code/PYTHON
+
+# Run the command to start the RQ worker
+CMD ["rq", "worker", "camera", "--url", "redis://redis:6379"]

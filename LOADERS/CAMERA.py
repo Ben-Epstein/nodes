@@ -1,5 +1,6 @@
 import cv2
 import os
+from os import path
 from flojoy import flojoy, DataContainer
 
 @flojoy
@@ -20,7 +21,11 @@ def CAMERA(v, params):
         camera_test = True
     except cv2.error as camera_error:  # Catch error for when a camera isn't detected.
         print('OpenCV cannot read the specified camera.')
-        filePath = "../public/assets/object_detection.png"  # Load example image instead. Should it throw an error?
+        # Get the absolute path of the current directory
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+
+        # Construct the path to the asset file
+        filePath= os.path.join(current_dir, 'assets', 'object_detection.png') # Load example image instead. Should it throw an error?
 
     # Load the file then delete if it's the file from the camera.
     print ("File to be loaded: " + filePath)
