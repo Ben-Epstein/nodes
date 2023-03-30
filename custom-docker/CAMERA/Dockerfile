@@ -1,5 +1,4 @@
-# https://hub.docker.com/r/nikolaik/python-nodejs
-FROM nikolaik/python-nodejs:latest
+FROM onscene/flojoy-base:latest
 
 # Set the working directory in the container
 WORKDIR /code
