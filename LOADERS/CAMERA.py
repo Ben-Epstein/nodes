@@ -17,8 +17,7 @@ def CAMERA(v, params):
     blue_channel = []
     alpha_channel = []
     try:
-        camera = cv2.VideoCapture('4')  # Camera indicator for selection of specific camera
-        # camera = cv2.VideoCapture(int(params['camera_ind']))  # Camera indicator for selection of specific camera
+        camera = cv2.VideoCapture(int(params['camera_ind']))  # Camera indicator for selection of specific camera
         return_value, image = camera.read()  # Read camera
         if image is None:
             raise cv2.error
